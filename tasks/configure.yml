@@ -2,7 +2,7 @@
 - name: Configure Elasticsearch
   become: true
   template:
-    src: elasticsearch.yml.j2
+    src: kibana.yml.j2
     mode: 0644
-    dest: /etc/elasticsearch/elasticsearch.yml
-  notify: restart Elasticsearch
+    dest: /etc/kibana/kibana.yml
+  notify: restart kibana

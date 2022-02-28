@@ -1,7 +1,7 @@
 ---
-- name: Install Elasticsearch
+- name: Install kibana
   become: true
   yum:
-    name: "/tmp/elasticsearch-{{ elasticsearch_version }}-x86_64.rpm"
+    name: "/tmp/kibana-{{ kibana_version }}-x86_64.rpm"
     state: present
-  notify: restart Elasticsearch
+  notify: restart kibana
