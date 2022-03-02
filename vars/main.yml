@@ -1,3 +1,4 @@
 ---
 # vars file for kibana-role
+supported_systems: ['CentOS', 'Red Hat Enterprise Linux', 'Ubuntu', 'Debian']
 kibana_version: "{{ elk_stack_version }}" 
