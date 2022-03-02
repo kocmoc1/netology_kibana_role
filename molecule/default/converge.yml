@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include netology_kibana_role"
+      include_role:
+        name: "netology_kibana_role"

@@ -1,22 +1,12 @@
 ---
 # tasks file for kibana-role
-- hosts: kibana
-  tasks:
-  - name: "Download Kibana's rpm"
-    get_url:
-      #https://artifacts.elastic.co/downloads/kibana/kibana-8.0.0-linux-x86_64.tar.gz
-      url: "https://artifacts.elastic.co/downloads/kibana/kibana-{{ kibana_version }}-x86_64.rpm"
-      dest: "/tmp/kibana-{{ kibana_version }}-x86_64.rpm"
-    register: download_kibana
-    until: download_kibana is succeeded
-  - name: Install Kibana
-    become: true
-    yum:
-      name: "/tmp/kibana-{{ kibana_version }}-x86_64.rpm"
-      state: present
-  - name: Configure kibana
-    become: true
-    template:
-      src: kibana.yml.j2
-      dest: /etc/kibana/kibana.yml
-    notify: restart kibana
+- import_tasks: precheck.yml
+- name: Check files directory exists
+  file:
+    name: files/
+    state: directory
+  run_once: true
+  delegate_to: localhost
+- include_tasks: "download_{{ ansible_facts.pkg_mgr }}.yml"
+- include_tasks: "install_{{ ansible_facts.pkg_mgr }}.yml"
+- import_tasks: configure.yml
